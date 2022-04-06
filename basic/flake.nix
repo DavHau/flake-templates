@@ -9,7 +9,7 @@
     nixpkgs,
     self,
   } @ inp: let
-    l = builtins;
+    l = nixpkgs.lib // builtins;
     supportedSystems = ["x86_64-linux"];
 
     forAllSystems = f: l.genAttrs supportedSystems
