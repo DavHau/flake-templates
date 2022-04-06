@@ -7,6 +7,7 @@
     templates = {
       basic = {
         description = "Basic nix flake with `forAllSystems`";
+        path = ./basic;
       };
     };
   };
