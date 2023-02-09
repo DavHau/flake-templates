@@ -1,14 +1,16 @@
 {config, lib, ...}: let
 
-  moduleKinds = builtins.readDir ../.;
+  modulesDir = ../.;
+
+  moduleKinds = builtins.readDir modulesDir;
 
   mapModules = kind:
     lib.mapAttrs'
     (fn: _:
       lib.nameValuePair
       (lib.removeSuffix ".nix" fn)
-      "${../.}/${kind}/${fn}")
-    (builtins.readDir ("${../.}/${kind}"));
+      "${modulesDir}/${kind}/${fn}")
+    (builtins.readDir ("${modulesDir}/${kind}"));
 
 in {
 

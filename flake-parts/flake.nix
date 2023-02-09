@@ -24,7 +24,7 @@
       # export all flake modules via `.modules.flakeParts.{file-name}`
       flake.modules.flakeParts =
         builtins.mapAttrs
-        (modulePath: _: "${./.}/modules/flake-parts/${modulePath}")
-        (builtins.readDir ./modules/flake-parts);
+        (modulePath: _: "${./nix}/modules/flake-parts/${modulePath}")
+        (builtins.readDir ./nix/modules/flake-parts);
     };
 }
