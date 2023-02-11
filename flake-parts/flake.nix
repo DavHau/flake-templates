@@ -20,7 +20,7 @@
       ];
 
       imports = [
-        ./nix/modules/flake-parts/modules.nix
+        ./nix/modules/flake-parts/all-modules.nix
       ];
     };
 }
