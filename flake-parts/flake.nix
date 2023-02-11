@@ -10,7 +10,8 @@
   };
 
   outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } rec {
+    flake-parts.lib.mkFlake { inherit inputs; } {
+
       systems = [
         "aarch64-darwin"
         "aarch64-linux"
@@ -18,13 +19,8 @@
         "x86_64-linux"
       ];
 
-      # auto import all nix code from `./modules`
-      imports = builtins.attrValues flake.modules.flakeParts;
-
-      # export all flake modules via `.modules.flakeParts.{file-name}`
-      flake.modules.flakeParts =
-        builtins.mapAttrs
-        (modulePath: _: "${./nix}/modules/flake-parts/${modulePath}")
-        (builtins.readDir ./nix/modules/flake-parts);
+      imports = [
+        ./nix/modules/flake-parts/modules.nix
+      ];
     };
 }

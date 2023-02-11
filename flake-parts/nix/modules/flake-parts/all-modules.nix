@@ -9,10 +9,18 @@
     (fn: _:
       lib.nameValuePair
       (lib.removeSuffix ".nix" fn)
-      "${modulesDir}/${kind}/${fn}")
-    (builtins.readDir ("${modulesDir}/${kind}"));
+      (modulesDir + "/${kind}/${fn}"))
+    (builtins.readDir (modulesDir + "/${kind}"));
+
+  flakePartsModules = lib.attrValues (
+    lib.filterAttrs
+    (modName: _: modName != "all-modules")
+    (mapModules "flake-parts")
+  );
 
 in {
+
+  imports = flakePartsModules;
 
   options.flake.modules = lib.mkOption {
     type = lib.types.anything;
