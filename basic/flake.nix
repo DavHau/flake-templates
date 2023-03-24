@@ -12,10 +12,9 @@
     l = nixpkgs.lib // builtins;
     supportedSystems = ["x86_64-linux"];
 
-    forAllSystems = f: l.genAttrs supportedSystems
+    forAllSystems = f:
+      l.genAttrs supportedSystems
       (system: f system nixpkgs.legacyPackages.${system});
-
   in {
-
   };
 }

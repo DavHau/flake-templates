@@ -1,4 +1,9 @@
-{ self, lib, inputs, ... }: let
+{
+  self,
+  lib,
+  inputs,
+  ...
+}: let
   nix-filter = inputs.nix-filter.lib;
 in {
   # options.src = lib.mkOption { type = lib.types.raw; };
