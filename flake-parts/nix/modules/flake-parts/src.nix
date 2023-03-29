@@ -13,6 +13,8 @@ in {
     exclude = [
       # exclude the ./nix directory
       "nix"
+      # exclude the flake.lock file
+      "flake.lock"
       # exclude all .nix files at all locations
       (nix-filter.matchExt ".nix")
     ];
