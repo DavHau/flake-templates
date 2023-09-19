@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  modulesDir = ../.;
+  modulesDir = config.modulesDir;
 
   moduleKinds = builtins.readDir modulesDir;
 
@@ -25,6 +25,20 @@ in {
 
   options.flake.modules = lib.mkOption {
     type = lib.types.anything;
+  };
+
+  options.modulesDir = lib.mkOption {
+    type = lib.types.path;
+    description = ''
+      Define directory to search for modules which to export via the flake.
+      Modules from:
+        - {modulesDir}/flake-parts/<name> will be imported automatically and exported to:
+          -> flake.modules.flake-parts.<name>
+        - {modulesDir}/nixos/<name> will be exported to:
+          -> flake.nixosModules.<name>
+        - {modulesDir}/<class>/<name> will be exported to:
+          -> flake.modules.<class>.<name>
+    '';
   };
 
   # generates future flake outputs: `modules.<kind>.<module-name>`
